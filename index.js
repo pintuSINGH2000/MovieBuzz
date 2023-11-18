@@ -27,10 +27,10 @@ app.use("/api/user",userRoute);
 app.use("/api/movie",movieRoute);
 app.use("/api/list",listRoute);
 
-app.use(express.static(path.join(__dirname,'../client/build')));
+app.use(express.static(path.join(__dirname,'./client/build')));
 
 app.use('*',function(req,res) {
-    res.sendFile(path.join(__dirname,'../client/build/index.html'));
+    res.sendFile(path.join(__dirname,'./client/build/index.html'));
  })
  
  const PORT = process.env.PORT || 8080;
