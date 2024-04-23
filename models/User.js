@@ -4,7 +4,6 @@ const userSchema = new mongoose.Schema({
     username:{
         type:String,
         required:true,
-        unique:true
     },
     email:{
         type:String,
@@ -16,13 +15,22 @@ const userSchema = new mongoose.Schema({
         required:true
     },
     profilePic:{
-        type:String,
-        default:""
+        data:Buffer,
+        contentType:String,
     },
     isAdmin:{
         type:Boolean,
         default:false
+    },
+    plan:{
+        type:Number,
+        required:true
+    },
+    expiryDate: {
+        type: Date,
+        required: true
     }
+    
 },{timestamp:true});
 
 module.exports = mongoose.model("User",userSchema);

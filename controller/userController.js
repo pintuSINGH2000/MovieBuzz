@@ -48,7 +48,7 @@ const getSingleUserController = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     const { password, ...info } = user._doc;
-    res.status(200).json("User has been deleted");
+    res.status(200).json(user);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
