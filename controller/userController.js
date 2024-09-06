@@ -149,14 +149,20 @@ const addMylistController = async (req, res) => {
 const removeMylistController = async (req, res) => {
   try {
     const { uid, vid } = req.params;
-
     const myListUpdate = await myList.findOneAndUpdate(
       { user: uid },
       { $pull: { movies: { movie: vid } } },
       { new: true }
     );
+    if (myListUpdate && (!myListUpdate.movies || myListUpdate.movies.length === 0)) {
+      await myList.findOneAndUpdate(
+        { user: uid },
+        { $set: { movies: [] } } 
+      );
+    }
     res.status(200).json({message: "Video removed from user list" });
   } catch (error) {
+    console.log(error);
     res.status(500).send(error);
   }
 };
